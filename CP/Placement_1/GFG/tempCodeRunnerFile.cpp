@@ -1,0 +1,2 @@
+
+        lastTwoSameMust=k;
