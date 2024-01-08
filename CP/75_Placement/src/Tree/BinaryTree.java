@@ -192,6 +192,55 @@ public class BinaryTree {
     }
 
 
+    //..........Binary treee right side View...........
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+              this.val = val;
+              this.left = left;
+              this.right = right;
+        }
+    }
+
+
+    static class Solution {
+
+        public LinkedList<Integer>traverse(TreeNode root,int height,LinkedList<Integer>list){
+            if(root==null){
+                return list;
+            }else{
+                height++;
+                if(list.size()<height){
+                    list.add(root.val);
+                }
+                traverse(root.right,height,list);
+                traverse(root.left,height,list);
+                height--;
+            }
+            return list;
+        }
+
+        //...........................
+
+
+
+
+        public List<Integer> rightSideView(TreeNode root) {
+
+            LinkedList<Integer>rightSide = new LinkedList<>();
+            rightSide = traverse(root,0,rightSide);
+
+            return rightSide;
+
+        }
+    }
+
+
 
 
 

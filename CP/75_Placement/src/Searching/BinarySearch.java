@@ -29,7 +29,6 @@ public class BinarySearch {
         } else if (num.length>low && num[low]>value) {
             return low;
         }
-
         return -1;
     }
 
