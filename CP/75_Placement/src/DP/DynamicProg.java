@@ -37,7 +37,7 @@ public class DynamicProg {
         return NthTribonacci(n,memo);
     }
 
-    public static int findProfit(int[]prices,int index,int buy, int[][]profitIndex){
+    public static int findProfit2(int[]prices,int index,int buy, int[][]profitIndex){
 
         if(index>=prices.length){
             return 0;
@@ -48,17 +48,17 @@ public class DynamicProg {
 
         int profit=0;
         if(buy==1){
-            profit=Math.max(-prices[index]+findProfit(prices,index+1,0,profitIndex),findProfit(prices,index+1,1,profitIndex));
+            profit=Math.max(-prices[index]+findProfit2(prices,index+1,0,profitIndex),findProfit2(prices,index+1,1,profitIndex));
 
 
         }else{
-            profit=Math.max(prices[index]+findProfit(prices,index+1,1,profitIndex),findProfit(prices,index+1,0,profitIndex));
+            profit=Math.max(prices[index]+findProfit2(prices,index+1,1,profitIndex),findProfit2(prices,index+1,0,profitIndex));
         }
 
         return profitIndex[index][buy]=profit;
     }
 
-    public static int maxProfit(int[] prices) {
+    public static int maxProfit2(int[] prices) {
         int n = prices.length;
         int[][]profitIndex=new int[n][2];
         for (int i = 0; i <n; i++) {
@@ -68,7 +68,48 @@ public class DynamicProg {
         if(prices.length==1){
             return 0;
         }
-        return findProfit(prices,0,1,profitIndex);
+        return findProfit2(prices,0,1,profitIndex);
+    }
+
+
+
+    static int findMaxCooldown(int[]prices,int index,int buy,int[][]profitArr){
+        if(index==prices.length){
+            return 0;
+        }
+        if(profitArr[index][buy]!=-100){
+            return profitArr[index][buy];
+        }
+
+        int profit=0;
+        if(buy==2){
+            findMaxCooldown(prices,index+1,1,profitArr);
+            profit=0;
+
+        }else if(buy==1){
+            profit=Math.max((-prices[index]+findMaxCooldown(prices,index+1,0,profitArr)),(0+findMaxCooldown(prices,index+1,1,profitArr)));
+        }else if(buy==0){
+            profit=Math.max((prices[index]+findMaxCooldown(prices,index+1,2,profitArr)),(0+findMaxCooldown(prices,index+1,0,profitArr)));
+        }
+        profitArr[index][buy]=profit;
+        return profit;
+
+    }
+    public static int maxProfitCooldown(int[] prices) {
+
+        int n=prices.length;
+        int[][]profitArr=new int[prices.length][3];
+
+        if(n==1){
+            return 0;
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+                profitArr[i][j]=-100;
+            }
+        }
+        return findMaxCooldown(prices,0,1,profitArr);
+
     }
 
 
@@ -78,7 +119,7 @@ public class DynamicProg {
     public  static  void main(String[]args){
 //        System.out.println(tribonacci(4));
 
-        int[]prices={7,1,5,3,6,4};
-        System.out.println(maxProfit(prices));
+        int[]prices={1,3};
+        System.out.println(maxProfitCooldown(prices));
     }
 }
