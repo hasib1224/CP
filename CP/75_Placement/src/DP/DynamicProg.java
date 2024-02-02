@@ -1,5 +1,7 @@
 package DP;
 
+
+
 public class DynamicProg {
     static int NthTribonacci(int n,int[]memo){
         if(n==1 || n==0 ||n==2){
@@ -115,11 +117,19 @@ public class DynamicProg {
 
 
 
+    public static void main(String[]args){
 
-    public  static  void main(String[]args){
-//        System.out.println(tribonacci(4));
 
-        int[]prices={1,3};
-        System.out.println(maxProfitCooldown(prices));
+    /////
+
     }
+
+
+
+
 }
+
+
+
+
+
