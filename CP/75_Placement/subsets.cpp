@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+//hfjhdbhf
 
 vector<vector<int>> subsetas(vector<int>& nums) {
         vector<vector<int>> subsets;
